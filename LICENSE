@@ -1,0 +1,20 @@
+VanTalk Proprietary License
+Copyright (c) 2026 NiSeullent
+
+This repository distributes VanTalk (Van톡) binaries only.
+Source code is NOT published and remains proprietary.
+
+You may:
+  - Download and run the official release binaries for personal use
+
+You may NOT:
+  - Redistribute the binaries without prior written permission
+  - Reverse engineer, decompile, or modify the software for republication
+  - Use the software for commercial resale or as a hosted service
+  - Claim affiliation with Kakao Corp. or official KakaoTalk
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+Use at your own risk. VanTalk is an unofficial third-party client.
+
+Acknowledgements:
+  Inspired by ChocoTalk (https://github.com/netricecake/chocotalk) by netricecake.

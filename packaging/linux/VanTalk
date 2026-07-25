@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# VanTalk desktop launcher (Linux)
+set -euo pipefail
+
+DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$DIR"
+
+# Prefer a full (non-headless) JDK for Swing UI
+if [[ -z "${JAVA_HOME:-}" ]]; then
+  if [[ -d "$HOME/.local/jdk/jdk-21.0.12+8" ]]; then
+    export JAVA_HOME="$HOME/.local/jdk/jdk-21.0.12+8"
+  elif [[ -d /usr/lib/jvm/java-21-openjdk-amd64 ]]; then
+    export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+  elif [[ -d /usr/lib/jvm/java-21-openjdk ]]; then
+    export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+  fi
+fi
+if [[ -n "${JAVA_HOME:-}" ]]; then
+  export PATH="$JAVA_HOME/bin:$PATH"
+fi
+
+if ! command -v java >/dev/null 2>&1; then
+  echo "VanTalk requires Java 21+ (full JDK recommended for Swing)." >&2
+  echo "Install OpenJDK 21 and ensure 'java' is on PATH, or set JAVA_HOME." >&2
+  exit 1
+fi
+
+JAR="$DIR/vantalk.jar"
+if [[ ! -f "$JAR" ]]; then
+  echo "Missing fat jar: $JAR" >&2
+  echo "Re-download VanTalk-linux-x64.zip from GitHub Releases." >&2
+  exit 1
+fi
+
+# login_data.json / chat DBs are created in this directory (user.dir)
+exec java -Xms128m -Xmx512m -jar "$JAR" "$@"

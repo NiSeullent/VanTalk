@@ -1,0 +1,17 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=VanTalk
+Name[ko]=Van톡
+GenericName=Messenger
+GenericName[ko]=메신저
+Comment=VanTalk desktop (KakaoTalk-compatible client)
+Comment[ko]=VanTalk 데스크톱 클라이언트
+Exec=@EXEC@
+Path=@PATH@
+Icon=@ICON@
+Terminal=false
+Categories=Network;InstantMessaging;Chat;
+Keywords=kakao;chat;messenger;vantalk;카카오;채팅;
+StartupNotify=true
+StartupWMClass=com-github-netricecake-chocotalk-Main

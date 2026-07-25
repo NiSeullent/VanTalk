@@ -1,0 +1,17 @@
+# local session / chat DBs (never commit)
+login_data.json
+last_tokens.json
+**/login_data.json
+**/*.db
+**/*.sqlite
+
+# OS junk
+.DS_Store
+Thumbs.db
+*.log
+
+# accidental source drops
+src/
+*.java
+.gradle/
+build/
