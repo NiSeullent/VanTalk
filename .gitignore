@@ -10,6 +10,11 @@ last_tokens.json
 Thumbs.db
 *.log
 
+# release artifacts (uploaded via gh release, not git)
+*.zip
+linux/
+windows/
+
 # accidental source drops
 src/
 *.java

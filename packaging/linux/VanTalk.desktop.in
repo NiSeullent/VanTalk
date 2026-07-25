@@ -14,4 +14,4 @@ Terminal=false
 Categories=Network;InstantMessaging;Chat;
 Keywords=kakao;chat;messenger;vantalk;카카오;채팅;
 StartupNotify=true
-StartupWMClass=com-github-netricecake-chocotalk-Main
+StartupWMClass=VanTalk
