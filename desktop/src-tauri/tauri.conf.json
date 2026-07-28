@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Van톡",
+  "productName": "VanTalk",
   "version": "2026.7.29",
   "identifier": "kr.nyase.vantalk",
   "build": {

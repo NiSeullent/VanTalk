@@ -5,5 +5,8 @@ dist-out/
 *.log
 .DS_Store
 .cargo-docker/
+.cargo-docker-win/
 .rustup-docker/
+.rustup-docker-win/
+.xwin-cache/
 .npm-docker/

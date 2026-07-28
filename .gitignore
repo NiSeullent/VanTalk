@@ -8,7 +8,9 @@ desktop/dist/
 desktop/dist-out/
 desktop/node_modules/
 desktop/.cargo-docker/
+desktop/.cargo-docker-win/
 desktop/.rustup-docker/
+desktop/.rustup-docker-win/
 desktop/.xwin-cache/
 desktop/src-tauri/target/
 *.log
