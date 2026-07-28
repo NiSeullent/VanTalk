@@ -19,10 +19,17 @@ export function normalizeExternalUrl(raw: string): string | null {
   try {
     const parsed = new URL(u);
     if (parsed.protocol !== 'https:') return null;
+    if (parsed.username || parsed.password) return null;
     return parsed.href;
   } catch {
     return null;
   }
+}
+
+/** Safe https URL for img/src/background-image (blocks javascript:, data: HTML, etc.). */
+export function normalizeHttpsAssetUrl(raw: string | undefined | null): string | null {
+  if (!raw) return null;
+  return normalizeExternalUrl(raw);
 }
 
 export function urlHostname(url: string): string {
