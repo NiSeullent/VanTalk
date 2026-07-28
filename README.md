@@ -83,7 +83,7 @@
 | `desktop/` | 호스팅 웹을 여는 Electron 하이브리드 셸 |
 | `docs/` | 아키텍처 · 원칙 · 면책 · 패치 노트 · 브랜딩 |
 
-자세한 구조는 [docs/architecture.md](docs/architecture.md), 운영 원칙은 [docs/principles.md](docs/principles.md)를 보세요.
+자세한 구조는 [docs/architecture.md](docs/architecture.md), 동작 원리·연구 목적·소스 공개 정책은 [docs/principles.md](docs/principles.md)를 보세요.
 
 ### 로컬에서 웹 UI만 실행
 

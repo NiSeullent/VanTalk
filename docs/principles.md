@@ -1,16 +1,102 @@
-# Principles — VanTalk v2026.7.29
+# 동작 원리 · 연구 목적 — Van톡
 
-1. **Web first**  
-   The product surface is the hosted web client. Desktop is a thin hybrid shell around that same origin.
+**Van톡**은 카카오톡을 **연구·학습 목적**으로 웹·하이브리드 환경에서 관찰·실험하기 위한 비공식 클라이언트입니다.  
+공식 제품을 대체하지 않으며, Kakao Corp.와 무관합니다.
 
-2. **No public backend keys**  
-   Operator secrets (AWS gateway, bridge SSH, service-role DB keys) stay off GitHub. The public repo ships UI only.
+---
 
-3. **Cloud sync, not local LOCO**  
-   As of v2026.7.29, fully local Java/LOCO desktop messaging is discontinued for the public distribution. The hybrid app does not embed a private Kakao protocol stack.
+## 연구 목적
 
-4. **User-held encryption where claimed**  
-   Chat backups are sealed on the client before upload. Snapshot cutoffs hide history until backup/visibility is set.
+이 프로젝트의 공개 범위는 다음을 위한 것입니다.
 
-5. **Honest packaging**  
-   Version pages and patch notes describe what actually shipped — not private infra runbooks.
+1. **동작 원리의 추상적 이해** — 클라이언트가 어떻게 로그인·동기화·표시 계층을 나누는지 개념적으로 설명
+2. **웹 UI·하이브리드 셸의 재현 가능성** — 브라우저에서 보이는 표면만 공개 저장소에 둠
+3. **책임 있는 공개** — 프로토콜 구동단·운영 인프라를 불특정 다수에게 복제 가능하게 열지 않음
+
+Van톡은 “카카오톡을 더 YARU하게!”라는 제품 브랜딩을 쓰되, **연구·실험 맥락**을 벗어난 운영·악용 안내를 제공하지 않습니다.
+
+---
+
+## 동작 원리 (추상)
+
+아래는 **대략적·개념적** 그림입니다. 실제 엔드포인트·프로토콜 필드·서버 배치·비밀은 공개하지 않습니다.
+
+```
+  [이용자]
+     │
+     ▼
+  ┌─────────────────────┐
+  │  Van톡 표면 (공개)   │   브라우저 또는 하이브리드 셸
+  │  · 화면 / 입력       │   ← 공개 GitHub에 포함되는 층
+  │  · 로그인 UI         │
+  └──────────┬──────────┘
+             │  인증·동기화 요청 (개념)
+             ▼
+  ┌─────────────────────┐
+  │  중계·저장 계층      │   “무엇이 오가는지”만 개념적으로 존재
+  │  (세부 비공개)       │   ← 구현·배포·키는 비공개
+  └──────────┬──────────┘
+             │
+             ▼
+  ┌─────────────────────┐
+  │  카카오톡 세계       │   공식 서비스 측 (Van톡이 소유하지 않음)
+  └─────────────────────┘
+```
+
+한 줄로 말하면:
+
+> **보이는 클라이언트(표면)** 와 **실제로 메시지를 움직이는 구동·백엔드** 는 분리되어 있으며,  
+> 공개 저장소는 표면만 담습니다.
+
+### 표면이 하는 일 (개념)
+
+- 이용자 인증 UI를 보여 주고, 세션이 유효한지 확인한다.
+- 채팅·친구·알림 등 **이미 동기화된 데이터**를 그려 준다.
+- 입력·첨부·설정 같은 **의도**를 중계 계층으로 넘긴다.
+
+### 표면이 하지 않는 일 (개념)
+
+- 카카오톡 프로토콜 스택을 이용자 PC에 통째로 심지 않는다. (공개 하이브리드 셸 기준)
+- 운영 서버·브릿지·게이트웨이의 내부 동작을 README로 재현하지 않는다.
+
+세부 배선은 [아키텍처](architecture.md)에 **공개 가능한 범위만** 적습니다.
+
+---
+
+## 소스 공개 정책 (못박음)
+
+### 공개하는 것
+
+- Van톡 **웹 UI** 및 **하이브리드 셸**의 공개용 소스
+- 소개·면책·버전·동작 원리(본 문서) 등 **문서**
+
+### 공개하지 않는 것
+
+다음의 **백엔드 및 구동단** 소스코드·실행 바이너리·운영 설정·접속 방법·자격 증명은  
+**카카오 팀**과 **nyase(NiSeullent)** 외에는 공개하지 않습니다.
+
+포함 예 (열거하되 전부는 아님):
+
+- 브릿지 / 세션·동기화 구동단
+- 인증·스토리지 게이트웨이의 비공개 구현
+- 인프라(IaC, SSH, VPN, 클라우드 시크릿)
+- 서비스 롤·마스터 키·프로덕션 환경 변수
+
+> **예외 공개 대상:** 카카오 팀 · nyase(NiSeullent)  
+> **그 외 개인·조직·미러·포크:** 백엔드·구동단 소스·접속 정보를 요구·배포·재배포하지 마십시오.
+
+공개 GitHub([NiSeullent/VanTalk](https://github.com/NiSeullent/VanTalk))에 없는 코드는 **의도적으로 없는 것**입니다.
+
+---
+
+## 원칙 요약
+
+| 원칙 | 의미 |
+|------|------|
+| 연구 우선 | 원리 설명·UI 실험이 목적. 무단 복제용 런북이 아님 |
+| 표면만 공개 | 웹·셸 UI는 공개, 구동·백엔드는 비공개 |
+| 추상 설명 | 본 문서는 대략적 원리만 그린다. 재현용 스펙이 아님 |
+| 이중 예외 | 카카오 팀 · nyase(NiSeullent) 외 구동단 비공개 |
+| 정직한 포장 | 버전·패치노트는 실제 공개물에 맞춰 쓴다 |
+
+버전: **v2026.7.29** · 브랜드: **Van톡** · 「카카오톡을 더 YARU하게!」

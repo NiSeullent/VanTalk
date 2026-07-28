@@ -4,7 +4,7 @@
 
 ![Van톡](branding/vantalk-hero.jpg)
 
-- [원칙](principles.md) — 왜 이런 스택인가
+- [동작 원리 · 연구 목적](principles.md) — 추상 원리와 구동단 비공개 정책
 - [아키텍처](architecture.md) — 웹 + 하이브리드 셸
 - [패치노트](patch-notes.md) — v2026.7.29
 - [버전](version.md) — 버전 메타
