@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>architecture — VanTalk</title><style>
+:root { color-scheme: light dark; --ink:#e8ecf5; --muted:#9aa3b5; --bg:#0b0d14; --card:#141826; --accent:#fee500; }
+body { margin:0; font-family: "Pretendard","Noto Sans KR",system-ui,sans-serif; background:#0b0d14; color:var(--ink); line-height:1.65; }
+main { max-width:760px; margin:0 auto; padding:40px 20px 80px; }
+a { color:#9ec1ff; }
+h1,h2,h3 { color:#fff; }
+p,li { color:var(--muted); }
+pre,code { background:#141826; padding:.15em .35em; border-radius:6px; }
+pre { padding:14px; overflow:auto; }
+.nav { margin-bottom:24px; }
+.nav a { margin-right:12px; }
+</style></head><body><main><div class="nav"><a href="./">Docs</a><a href="https://vantalk.nyase.kr/">App</a><a href="https://github.com/NiSeullent/VanTalk">GitHub</a></div><h1>Architecture — VanTalk v2026.7.29</h1>
+<pre>
+┌──────────────────────┐     HTTPS      ┌─────────────────────────┐
+│  Browser / Hybrid    │ ─────────────► │  https://vantalk.nyase.kr │
+│  Electron shell      │                │  static web (S3+CF)      │
+└──────────────────────┘                └────────────┬────────────┘
+                                                     │
+                         Firebase Auth (Google)      │
+                         Supabase (data + storage)   │
+                         Auth API via Edge proxy     │
+                                                     ▼
+                                        ┌────────────────────────┐
+                                        │  Private operator       │
+                                        │  infra (not in repo)    │
+                                        └────────────────────────┘
+</pre>
+<h2>Web client</h2>
+<ul>
+<li>React + Vite SPA under `web/`</li>
+<li>Login: Firebase Auth (Google) then Kakao account link through the public Auth API proxy</li>
+<li>Rooms/messages/feed/notifications: Supabase realtime tables</li>
+<li>Avatars &amp; encrypted chat backups: Supabase Storage via a Firebase-JWT storage gateway</li>
+</ul>
+<h2>Hybrid desktop</h2>
+<ul>
+<li>`desktop/` Electron window loads `https://vantalk.nyase.kr/`</li>
+<li>No embedded bridge JAR, no local LOCO socket, no offline Kakao protocol</li>
+</ul>
+<h2>What is intentionally omitted</h2>
+<p>Deployment scripts that reveal cloud accounts, gateway shared secrets, SSH hosts, or WireGuard peers are <strong>not</strong> part of this repository.</p></main></body></html>

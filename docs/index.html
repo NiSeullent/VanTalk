@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VanTalk Docs — v2026.7.29</title>
+  <style>
+    :root { color-scheme: light dark; --ink:#e8ecf5; --muted:#9aa3b5; --bg:#0b0d14; --card:#141826; --accent:#fee500; }
+    body { margin:0; font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; background:linear-gradient(160deg,#0b0d14,#151a28 50%,#0b0d14); color:var(--ink); line-height:1.6; }
+    main { max-width: 720px; margin: 0 auto; padding: 48px 20px 80px; }
+    h1 { font-size: 2rem; margin: 0 0 8px; }
+    .ver { color: var(--accent); font-weight: 700; letter-spacing: .04em; }
+    p, li { color: var(--muted); }
+    a { color: #9ec1ff; }
+    .card { background: var(--card); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 18px 20px; margin: 14px 0; }
+    nav { display:flex; flex-wrap:wrap; gap:10px; margin: 24px 0; }
+    nav a { text-decoration:none; padding:8px 12px; border-radius:999px; background:rgba(254,229,0,.08); color:var(--accent); border:1px solid rgba(254,229,0,.25); }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="ver">v2026.7.29</p>
+    <h1>VanTalk 문서</h1>
+    <p>웹 클라이언트 + 하이브리드 데스크톱 셸. 공개 저장소에는 백엔드 키·AWS 접속 방법이 포함되지 않습니다.</p>
+    <nav>
+      <a href="./principles.html">원리</a>
+      <a href="./architecture.html">동작 구조</a>
+      <a href="./patch-notes.html">패치노트</a>
+      <a href="./version.html">버전</a>
+      <a href="./disclaimer.html">면책</a>
+      <a href="https://vantalk.nyase.kr/">앱 열기</a>
+      <a href="https://github.com/NiSeullent/VanTalk">GitHub</a>
+    </nav>
+    <div class="card">
+      <strong>한 줄 요약</strong>
+      <p>브라우저(또는 Electron 셸) → 호스팅된 웹앱 → Firebase 로그인 / Supabase 데이터·스토리지 / 비공개 브릿지(레포 외부).</p>
+    </div>
+  </main>
+</body>
+</html>

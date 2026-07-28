@@ -1,0 +1,24 @@
+{
+  "name": "vantalk-desktop",
+  "version": "2026.7.29",
+  "private": true,
+  "description": "VanTalk hybrid desktop shell (loads the hosted web app)",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "kr.nyase.vantalk",
+    "productName": "VanTalk",
+    "directories": { "output": "dist" },
+    "linux": { "target": ["AppImage", "deb"], "category": "Network" },
+    "win": { "target": ["nsis"] },
+    "files": ["main.js", "preload.js", "icon.png"]
+  },
+  "devDependencies": {
+    "electron": "^37.2.0",
+    "electron-builder": "^26.0.12"
+  }
+}

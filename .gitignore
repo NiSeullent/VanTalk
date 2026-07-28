@@ -1,22 +1,30 @@
-# local session / chat DBs (never commit)
-login_data.json
-last_tokens.json
-**/login_data.json
-**/*.db
-**/*.sqlite
-
-# OS junk
-.DS_Store
-Thumbs.db
+# Dependencies & build
+node_modules/
+dist/
+web/dist/
+desktop/dist/
+desktop/node_modules/
 *.log
+.DS_Store
 
-# release artifacts (uploaded via gh release, not git)
-*.zip
-linux/
-windows/
+# Secrets — never commit
+.env
+.env.*
+!.env.production.example
+!.env.example
+secret
+secrets/
+*.pem
+*.pass
+*credentials*
+*service-account*
+firebase-service-account.json
+login_data.json
 
-# accidental source drops
-src/
-*.java
-.gradle/
+# Private backend / infra (not part of this public web repo)
+../chocotalk/
+deploy/
+src/main/
 build/
+.gradle/
+.firebase/

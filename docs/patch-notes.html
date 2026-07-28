@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>patch-notes — VanTalk</title><style>
+:root { color-scheme: light dark; --ink:#e8ecf5; --muted:#9aa3b5; --bg:#0b0d14; --card:#141826; --accent:#fee500; }
+body { margin:0; font-family: "Pretendard","Noto Sans KR",system-ui,sans-serif; background:#0b0d14; color:var(--ink); line-height:1.65; }
+main { max-width:760px; margin:0 auto; padding:40px 20px 80px; }
+a { color:#9ec1ff; }
+h1,h2,h3 { color:#fff; }
+p,li { color:var(--muted); }
+pre,code { background:#141826; padding:.15em .35em; border-radius:6px; }
+pre { padding:14px; overflow:auto; }
+.nav { margin-bottom:24px; }
+.nav a { margin-right:12px; }
+</style></head><body><main><div class="nav"><a href="./">Docs</a><a href="https://vantalk.nyase.kr/">App</a><a href="https://github.com/NiSeullent/VanTalk">GitHub</a></div><h1>Patch notes — v2026.7.29</h1>
+<p><strong>Release date:</strong> 2026-07-29</p>
+<h2>Highlights</h2>
+<ul>
+<li>Public distribution is **web + hybrid shell** only</li>
+<li>Firestore removed from the web client data path; Supabase is required</li>
+<li>Chat visibility **snapshot** save fixed (storage gateway JWT + timeout)</li>
+<li>Encrypted Google-linked chat backup uses Supabase Storage</li>
+<li>Personal info / terms surfaces retained in-app</li>
+<li>Full local LOCO desktop client **discontinued** in the public package</li>
+</ul>
+<h2>Fixes</h2>
+<ul>
+<li>Snapshot dialog no longer sticks on “저장 중…” when the storage gateway rejected Firebase JWTs at the edge</li>
+<li>Separate `snapshotBusy` state so other busy flags cannot strand the dialog</li>
+</ul>
+<h2>Docs</h2>
+<ul>
+<li>Principles, architecture, disclaimer, version pages published via GitHub Pages</li>
+</ul></main></body></html>

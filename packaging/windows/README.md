@@ -1,13 +1,3 @@
-# VanTalk — Windows
+# Windows hybrid launcher
 
-## Run
-
-1. Install **JDK 21+** and ensure `java` is on `PATH`
-2. Double-click `VanTalk.bat`
-
-Login data (`login_data.json`) is created in this folder.
-
-## Notes
-
-- Use a full JDK if Swing fails to start (avoid headless-only JRE)
-- Close VanTalk completely before replacing `vantalk.jar`
+Double-click `VanTalk.bat` to open the hosted web app. Full local LOCO clients are discontinued (v2026.7.29).

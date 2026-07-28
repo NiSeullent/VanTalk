@@ -1,24 +1,8 @@
-# VanTalk — Linux
+# Linux hybrid launcher
 
-## Run
-
-```bash
-chmod +x VanTalk
-./VanTalk
-```
-
-Requires **Java 21+** (full JDK recommended).
-
-## Shortcuts (Zorin / Ubuntu / GNOME)
+v2026.7.29 — opens https://vantalk.nyase.kr/ in the default browser or Electron shell.
 
 ```bash
-./install-shortcuts.sh
+./VanTalk   # browser fallback
+# or: cd ../../desktop && npm start
 ```
-
-| Item | Path |
-|------|------|
-| App menu | `~/.local/share/applications/vantalk.desktop` |
-| Desktop | `~/Desktop/VanTalk.desktop` (or XDG desktop) |
-| Files | `~/.local/share/VanTalk/` |
-
-Remove: `./uninstall-shortcuts.sh` · purge: `./uninstall-shortcuts.sh --purge`
