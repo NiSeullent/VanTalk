@@ -14,7 +14,8 @@ npm run dev
 npm run build
 ```
 
-GitHub Actions(`.github/workflows/docs.yml`)가 `main` 푸시 시 Pages로 배포합니다.
-베이스 경로는 `/VanTalk/` 입니다.
+빌드 결과물은 `../docs/` 로 출력됩니다 (`base: '/VanTalk/'`).  
+GitHub Pages는 **main 브랜치 `/docs` 폴더**를 서빙합니다.  
+문서 내용을 바꾼 뒤에는 `npm run build` 후 `docs/index.html`·`docs/assets/` 변경을 함께 커밋하세요.
 
-마크다운 원문(README 링크용)은 저장소 루트 `docs/*.md` 에 있습니다.
+마크다운 원문(README 링크용)은 `docs/*.md` 에 있습니다.

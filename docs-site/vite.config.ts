@@ -1,20 +1,32 @@
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
-import { copyFileSync, existsSync } from 'node:fs'
+import { copyFileSync, existsSync, rmSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const rootDir = dirname(fileURLToPath(import.meta.url))
+const docsOut = resolve(rootDir, '../docs')
+
+/** Clear previous Vite publish artifacts without wiping markdown/branding. */
+function cleanDocsPublish(): Plugin {
+  return {
+    name: 'clean-docs-publish',
+    buildStart() {
+      for (const name of ['index.html', '404.html', 'assets']) {
+        rmSync(resolve(docsOut, name), { recursive: true, force: true })
+      }
+    },
+  }
+}
 
 /** GitHub Pages SPA fallback: duplicate index.html as 404.html */
 function spaFallback(): Plugin {
   return {
     name: 'spa-fallback-404',
     closeBundle() {
-      const out = resolve(rootDir, 'dist')
-      const index = resolve(out, 'index.html')
+      const index = resolve(docsOut, 'index.html')
       if (existsSync(index)) {
-        copyFileSync(index, resolve(out, '404.html'))
+        copyFileSync(index, resolve(docsOut, '404.html'))
       }
     },
   }
@@ -22,9 +34,11 @@ function spaFallback(): Plugin {
 
 export default defineConfig({
   base: '/VanTalk/',
-  plugins: [react(), spaFallback()],
+  plugins: [react(), cleanDocsPublish(), spaFallback()],
   build: {
-    outDir: 'dist',
-    emptyOutDir: true,
+    // Publish into /docs for GitHub Pages (legacy branch deploy).
+    // Markdown + branding under docs/ are preserved (emptyOutDir: false).
+    outDir: '../docs',
+    emptyOutDir: false,
   },
 })
