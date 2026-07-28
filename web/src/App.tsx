@@ -4616,19 +4616,16 @@ export default function App() {
                 <header className="legal-doc-head">
                   <h2>버전 {VANTALK_VERSION_LABEL}</h2>
                   <p>Van톡 웹 · 하이브리드 셸</p>
-                  <p className="login-slogan">카카오톡을 더 YARU하게!</p>
                 </header>
                 <section className="legal-section">
-                  <h3>이 빌드</h3>
-                  <p>공개 배포물은 웹 클라이언트와 하이브리드 데스크톱 셸입니다. 완전 로컬 LOCO 통신은 v2026.7.29에서 폐지되었습니다.</p>
                   <p>
-                    <a href={VANTALK_DOCS_URL} target="_blank" rel="noreferrer">문서 (GitHub Pages)</a>
+                    <a href={VANTALK_DOCS_URL} target="_blank" rel="noreferrer">문서</a>
                     {' · '}
                     <a href={VANTALK_GITHUB_URL} target="_blank" rel="noreferrer">GitHub</a>
                   </p>
-                  <button type="button" className="btn-text" onClick={() => setLegalDoc('patch')}>패치노트 보기</button>
+                  <button type="button" className="btn-text" onClick={() => setLegalDoc('patch')}>패치노트</button>
                   {' '}
-                  <button type="button" className="btn-text" onClick={() => setLegalDoc('disclaimer')}>면책 보기</button>
+                  <button type="button" className="btn-text" onClick={() => setLegalDoc('disclaimer')}>면책</button>
                 </section>
               </article>
             )}
@@ -4639,8 +4636,7 @@ export default function App() {
                   <p>2026-07-29</p>
                 </header>
                 <section className="legal-section">
-                  <h3>변경</h3>
-                  <p>Supabase 강제, Firestore 웹 경로 제거, 스냅샷 저장 수정, 하이브리드 데스크톱, 공개 문서.</p>
+                  <p>Supabase 데이터 경로, 스냅샷 저장 수정, 하이브리드 데스크톱.</p>
                   <p><a href={`${VANTALK_DOCS_URL}patch-notes.html`} target="_blank" rel="noreferrer">전체 패치노트</a></p>
                 </section>
               </article>
@@ -4649,11 +4645,10 @@ export default function App() {
               <article className="legal-doc">
                 <header className="legal-doc-head">
                   <h2>면책</h2>
-                  <p>Unofficial client</p>
                 </header>
                 <section className="legal-section">
-                  <p>Van톡은 비공식 클라이언트이며 Kakao와 무관합니다. 공개 저장소에는 웹 UI만 포함되며 백엔드 키·AWS 접속 방법은 포함되지 않습니다.</p>
-                  <p><a href={`${VANTALK_DOCS_URL}disclaimer.html`} target="_blank" rel="noreferrer">전체 면책 문서</a></p>
+                  <p>Van톡은 비공식 클라이언트이며 Kakao와 무관합니다.</p>
+                  <p><a href={`${VANTALK_DOCS_URL}disclaimer.html`} target="_blank" rel="noreferrer">자세한 면책</a></p>
                 </section>
               </article>
             )}

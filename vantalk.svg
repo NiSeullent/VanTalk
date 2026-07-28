@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
-  <rect width="256" height="256" rx="56" fill="#FEE500"/>
-  <text x="128" y="168" text-anchor="middle" font-family="Segoe UI, Ubuntu, sans-serif"
-        font-size="140" font-weight="800" fill="#191919">V</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Van?">
+  <!-- Transparent canvas; yellow rounded mark only (no black mat) -->
+  <rect width="128" height="128" rx="28" fill="#FEE500"/>
+  <text x="64" y="74" text-anchor="middle" font-family="'Noto Sans KR','Apple SD Gothic Neo','Segoe UI',system-ui,sans-serif" font-size="42" font-weight="900" fill="#191919" letter-spacing="-1.5">Van</text>
+  <text x="64" y="104" text-anchor="middle" font-family="'Noto Sans KR','Apple SD Gothic Neo','Segoe UI',system-ui,sans-serif" font-size="20" font-weight="800" fill="#191919">?</text>
 </svg>

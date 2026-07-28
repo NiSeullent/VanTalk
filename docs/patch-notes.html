@@ -18,31 +18,27 @@
         <span>Van톡</span>
       </a>
       <a href="./">Docs</a>
-      <a href="./principles.html">동작 원리</a>
+      <a href="./architecture.html">아키텍처</a>
       <a class="primary" href="https://vantalk.nyase.kr/">App</a>
       <a href="https://github.com/NiSeullent/VanTalk">GitHub</a>
     </nav>
     <div class="shell-lite">
-<h1>Patch notes — v2026.7.29</h1>
-<p><strong>Release date:</strong> 2026-07-29</p>
-<h2>Highlights</h2>
-<ul>
-<li>Public distribution is **web + hybrid shell** only</li>
-<li>Firestore removed from the web client data path; Supabase is required</li>
-<li>Chat visibility **snapshot** save fixed (storage gateway JWT + timeout)</li>
-<li>Encrypted Google-linked chat backup uses Supabase Storage</li>
-<li>Personal info / terms surfaces retained in-app</li>
-<li>Full local LOCO desktop client **discontinued** in the public package</li>
-</ul>
-<h2>Fixes</h2>
-<ul>
-<li>Snapshot dialog no longer sticks on “저장 중…” when the storage gateway rejected Firebase JWTs at the edge</li>
-<li>Separate `snapshotBusy` state so other busy flags cannot strand the dialog</li>
-</ul>
-<h2>Docs</h2>
-<ul>
-<li>Principles, architecture, disclaimer, version pages published via GitHub Pages</li>
-</ul>
+      <h1>패치노트 — v2026.7.29</h1>
+      <p><strong>날짜:</strong> 2026-07-29</p>
+      <h2>변경</h2>
+      <ul>
+        <li>공개 배포: 웹 + 하이브리드 셸</li>
+        <li>웹 데이터 경로를 Supabase로 통일 (Firestore 클라이언트 경로 제거)</li>
+        <li>채팅 표시 스냅샷 저장 수정 (스토리지 게이트웨이 JWT·타임아웃)</li>
+        <li>Google 연동 암호화 채팅 백업 → Supabase Storage</li>
+        <li>로컬 LOCO 풀스택 데스크톱 공개 패키지 중단</li>
+      </ul>
+      <h2>수정</h2>
+      <ul>
+        <li>스냅샷 저장이 “저장 중…”에 멈추던 문제</li>
+        <li>스냅샷 저장용 <code>snapshotBusy</code> 상태를 분리해 다이얼로그가 다른 busy 플래그에 묶이지 않도록 함</li>
+      </ul>
+      <p class="foot">v2026.7.29 · Van톡</p>
     </div>
   </main>
 </body>

@@ -18,14 +18,13 @@
         <span>Van톡</span>
       </a>
       <a href="./">Docs</a>
-      <a href="./principles.html">동작 원리</a>
+      <a href="./patch-notes.html">패치노트</a>
       <a class="primary" href="https://vantalk.nyase.kr/">App</a>
       <a href="https://github.com/NiSeullent/VanTalk">GitHub</a>
     </nav>
     <div class="shell-lite">
-<h1>아키텍처 — Van톡 v2026.7.29</h1>
-<pre>
-┌──────────────────────┐     HTTPS      ┌─────────────────────────┐
+      <h1>아키텍처 — Van톡 v2026.7.29</h1>
+      <pre class="diagram">┌──────────────────────┐     HTTPS      ┌─────────────────────────┐
 │  Browser / Hybrid    │ ─────────────► │  https://vantalk.nyase.kr │
 │  Electron shell      │                │  static web (S3+CF)      │
 └──────────────────────┘                └────────────┬────────────┘
@@ -35,24 +34,24 @@
                          Auth API via Edge proxy     │
                                                      ▼
                                         ┌────────────────────────┐
-                                        │  Private operator       │
-                                        │  infra (not in repo)    │
-                                        └────────────────────────┘
-</pre>
-<h2>Web client</h2>
-<ul>
-<li>React + Vite SPA under `web/`</li>
-<li>Login: Firebase Auth (Google) then Kakao account link through the public Auth API proxy</li>
-<li>Rooms/messages/feed/notifications: Supabase realtime tables</li>
-<li>Avatars &amp; encrypted chat backups: Supabase Storage via a Firebase-JWT storage gateway</li>
-</ul>
-<h2>Hybrid desktop</h2>
-<ul>
-<li>`desktop/` Electron window loads `https://vantalk.nyase.kr/`</li>
-<li>No embedded bridge JAR, no local LOCO socket, no offline Kakao protocol</li>
-</ul>
-<h2>What is intentionally omitted</h2>
-<p>Deployment scripts that reveal cloud accounts, gateway shared secrets, SSH hosts, or WireGuard peers are <strong>not</strong> part of this repository.</p>
+                                        │  Operator infra         │
+                                        │  (not in this repo)     │
+                                        └────────────────────────┘</pre>
+      <h2>웹 클라이언트</h2>
+      <ul>
+        <li><code>web/</code> — React + Vite SPA</li>
+        <li>로그인: Firebase Auth (Google) → 공개 Auth API로 카카오 계정 연결</li>
+        <li>채팅방·메시지·피드·알림: Supabase realtime</li>
+        <li>아바타·암호화 채팅 백업: Supabase Storage (Firebase JWT 게이트웨이)</li>
+      </ul>
+      <h2>하이브리드 데스크톱</h2>
+      <ul>
+        <li><code>desktop/</code> Electron이 <code>https://vantalk.nyase.kr/</code> 를 엽니다</li>
+        <li>로컬 LOCO 소켓·브릿지 JAR는 공개 패키지에 없습니다</li>
+      </ul>
+      <h2>저장소 범위</h2>
+      <p>이 저장소에는 웹 UI와 하이브리드 셸이 있습니다. 클라우드 계정·게이트웨이 시크릿·SSH 호스트 등은 포함하지 않습니다.</p>
+      <p class="foot">v2026.7.29 · Van톡</p>
     </div>
   </main>
 </body>

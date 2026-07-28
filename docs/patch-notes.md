@@ -1,21 +1,16 @@
-# Patch notes — v2026.7.29
+# 패치노트 — v2026.7.29
 
-**Release date:** 2026-07-29
+**날짜:** 2026-07-29
 
-## Highlights
+## 변경
 
-- Public distribution is **web + hybrid shell** only
-- Firestore removed from the web client data path; Supabase is required
-- Chat visibility **snapshot** save fixed (storage gateway JWT + timeout)
-- Encrypted Google-linked chat backup uses Supabase Storage
-- Personal info / terms surfaces retained in-app
-- Full local LOCO desktop client **discontinued** in the public package
+- 공개 배포: 웹 + 하이브리드 셸
+- 웹 데이터 경로를 Supabase로 통일 (Firestore 클라이언트 경로 제거)
+- 채팅 표시 스냅샷 저장 수정 (스토리지 게이트웨이 JWT·타임아웃)
+- Google 연동 암호화 채팅 백업 → Supabase Storage
+- 로컬 LOCO 풀스택 데스크톱 공개 패키지 중단
 
-## Fixes
+## 수정
 
-- Snapshot dialog no longer sticks on “저장 중…” when the storage gateway rejected Firebase JWTs at the edge
-- Separate `snapshotBusy` state so other busy flags cannot strand the dialog
-
-## Docs
-
-- Principles, architecture, disclaimer, version pages published via GitHub Pages
+- 스냅샷 저장이 “저장 중…”에 멈추던 문제
+- 스냅샷 저장용 `snapshotBusy` 상태를 분리해 다이얼로그가 다른 busy 플래그에 묶이지 않도록 함

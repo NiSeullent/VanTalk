@@ -145,9 +145,14 @@ a:hover { color: var(--brown); }
   background: rgba(255,255,255,0.5);
   border: 1px solid rgba(255,255,255,0.75);
   box-shadow: inset 0 1px rgba(255,255,255,0.8);
+  color: inherit;
+  text-decoration: none;
+  display: block;
 }
-.card strong { display: block; margin-bottom: 6px; }
+a.card:hover { border-color: rgba(25,25,25,0.18); }
+.card strong { display: block; margin-bottom: 6px; color: var(--ink); }
 .card p { margin: 0; color: var(--muted); font-size: 0.94rem; }
+.muted { color: var(--muted); font-size: 0.92rem; }
 .note {
   margin-top: 18px;
   padding: 14px 16px;

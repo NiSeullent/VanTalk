@@ -1,4 +1,4 @@
-# Architecture — VanTalk v2026.7.29
+# 아키텍처 — Van톡 v2026.7.29
 
 ```text
 ┌──────────────────────┐     HTTPS      ┌─────────────────────────┐
@@ -11,23 +11,23 @@
                          Auth API via Edge proxy     │
                                                      ▼
                                         ┌────────────────────────┐
-                                        │  Private operator       │
-                                        │  infra (not in repo)    │
+                                        │  Operator infra         │
+                                        │  (not in this repo)     │
                                         └────────────────────────┘
 ```
 
-## Web client
+## 웹 클라이언트
 
-- React + Vite SPA under `web/`
-- Login: Firebase Auth (Google) then Kakao account link through the public Auth API proxy
-- Rooms/messages/feed/notifications: Supabase realtime tables
-- Avatars & encrypted chat backups: Supabase Storage via a Firebase-JWT storage gateway
+- `web/` — React + Vite SPA
+- 로그인: Firebase Auth (Google) → 공개 Auth API로 카카오 계정 연결
+- 채팅방·메시지·피드·알림: Supabase realtime
+- 아바타·암호화 채팅 백업: Supabase Storage (Firebase JWT 게이트웨이)
 
-## Hybrid desktop
+## 하이브리드 데스크톱
 
-- `desktop/` Electron window loads `https://vantalk.nyase.kr/`
-- No embedded bridge JAR, no local LOCO socket, no offline Kakao protocol
+- `desktop/` Electron이 `https://vantalk.nyase.kr/` 를 엽니다
+- 로컬 LOCO 소켓·브릿지 JAR는 공개 패키지에 없습니다
 
-## What is intentionally omitted
+## 저장소 범위
 
-Deployment scripts that reveal cloud accounts, gateway shared secrets, SSH hosts, or WireGuard peers are **not** part of this repository.
+이 저장소에는 웹 UI와 하이브리드 셸이 있습니다. 클라우드 계정·게이트웨이 시크릿·SSH 호스트 등은 포함하지 않습니다.
