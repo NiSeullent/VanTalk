@@ -13,4 +13,4 @@
 제품: [https://vantalk.nyase.kr/](https://vantalk.nyase.kr/)  
 소스(웹만): [https://github.com/NiSeullent/VanTalk](https://github.com/NiSeullent/VanTalk)
 
-브랜딩: **Van톡** · `#FEE500` · 글래스 셸 (전단지형 과대광고 톤 지양)
+브랜딩: **Van톡** · `#FEE500` · 글래스 셸
