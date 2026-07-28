@@ -2851,8 +2851,7 @@ export default function App() {
           <h1>Van톡</h1>
           <p className="login-slogan">카카오톡을 더 YARU하게!</p>
           <p className="login-sub">
-            Google로 시작한 뒤 카카오톡을 연결하세요.<br />
-            이후에는 카카오톡 계정으로도 같은 채팅에 로그인할 수 있습니다.
+            비공식 웹 클라이언트입니다. Google로 시작한 뒤 카카오톡을 연결하세요.
           </p>
           {error && <div className="error-banner">{error}</div>}
 

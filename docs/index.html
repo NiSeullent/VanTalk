@@ -4,122 +4,74 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#FEE500" />
-  <title>Van톡 문서 — 카카오톡을 더 YARU하게!</title>
-  <style>
-    :root {
-      color-scheme: light dark;
-      --ink: #191919;
-      --muted: #4a4a4a;
-      --bg: #FEE500;
-      --card: #fffdf0;
-      --accent: #191919;
-      --yellow: #FEE500;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
-      background:
-        radial-gradient(ellipse at 20% 0%, #fff59a 0%, transparent 45%),
-        linear-gradient(180deg, #FEE500 0%, #f5e000 38%, #1a1a1a 38%, #0b0d14 100%);
-      color: var(--ink);
-      line-height: 1.65;
-      min-height: 100vh;
-    }
-    .hero {
-      width: 100%;
-      max-height: 320px;
-      object-fit: cover;
-      display: block;
-      border-bottom: 4px solid #191919;
-    }
-    main { max-width: 760px; margin: 0 auto; padding: 28px 20px 80px; }
-    .brand-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin: -48px 0 18px;
-      position: relative;
-    }
-    .brand-row img.logo {
-      width: 88px;
-      height: 88px;
-      border-radius: 22px;
-      border: 3px solid #191919;
-      background: #FEE500;
-      box-shadow: 0 12px 28px rgba(0,0,0,.28);
-    }
-    h1 { font-size: 2.2rem; margin: 0; letter-spacing: -0.03em; color: #fff; }
-    .slogan {
-      margin: 6px 0 0;
-      font-weight: 800;
-      font-size: 1.05rem;
-      color: #FEE500;
-      letter-spacing: -0.02em;
-    }
-    .ver {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: #FEE500;
-      color: #191919;
-      font-weight: 800;
-      font-size: 0.85rem;
-    }
-    p, li { color: #c9d0de; }
-    .lead { color: #e8ecf5; font-size: 1.05rem; }
-    a { color: #FEE500; }
-    .card {
-      background: rgba(20, 24, 38, 0.92);
-      border: 1px solid rgba(254, 229, 0, 0.22);
-      border-radius: 16px;
-      padding: 18px 20px;
-      margin: 14px 0;
-      color: #e8ecf5;
-    }
-    .card p { color: #b7bfcf; margin: 8px 0 0; }
-    nav { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0; }
-    nav a {
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(254, 229, 0, 0.12);
-      color: #FEE500;
-      border: 1px solid rgba(254, 229, 0, 0.35);
-      font-weight: 600;
-    }
-  </style>
+  <title>Van톡 — 문서</title>
+  <link rel="icon" href="./branding/vantalk-mark.svg" />
+  <link rel="stylesheet" href="./site.css" />
 </head>
 <body>
-  <img class="hero" src="./branding/vantalk-hero.jpg" alt="Van톡 — 카카오톡을 더 YARU하게!" />
-  <main>
-    <div class="brand-row">
-      <img class="logo" src="./branding/vantalk-logo.png" alt="Van톡 로고" />
-      <div>
-        <h1>Van톡</h1>
-        <p class="slogan">카카오톡을 더 YARU하게!</p>
-        <span class="ver">v2026.7.29 · #FEE500</span>
-      </div>
-    </div>
-    <p class="lead">비공식 카카오톡 웹 클라이언트 · 하이브리드 데스크톱 셸. 공개 저장소에는 백엔드 키·AWS 접속 방법이 포함되지 않습니다.</p>
-    <nav>
+  <div class="wrap">
+    <nav class="topnav" aria-label="문서 메뉴">
+      <a class="primary" href="https://vantalk.nyase.kr/">앱 열기</a>
       <a href="./principles.html">동작 원리</a>
       <a href="./architecture.html">아키텍처</a>
       <a href="./patch-notes.html">패치노트</a>
       <a href="./version.html">버전</a>
       <a href="./disclaimer.html">면책</a>
-      <a href="https://vantalk.nyase.kr/">앱 열기</a>
       <a href="https://github.com/NiSeullent/VanTalk">GitHub</a>
     </nav>
-    <div class="card">
-      <strong>한 줄 요약</strong>
-      <p>브라우저(또는 Electron 셸) → 호스팅된 Van톡 웹앱 → Firebase 로그인 / Supabase 데이터·스토리지 / 비공개 브릿지(레포 외부).</p>
-    </div>
-    <div class="card">
-      <strong>브랜딩</strong>
-      <p>제품명 <b>Van톡</b> · 슬로건 「카카오톡을 더 YARU하게!」 · 메인 컬러 카카오 옐로우 <code>#FEE500</code>.</p>
-    </div>
-  </main>
+
+    <section class="shell" aria-label="Van톡 소개">
+      <aside class="rail" aria-hidden="true">
+        <div class="mark">V</div>
+        <span class="dot on"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </aside>
+      <div class="pane">
+        <div class="brand">
+          <img class="logo" src="./branding/vantalk-logo.png" alt="Van톡" />
+          <div>
+            <h1>Van톡</h1>
+            <p class="slogan">카카오톡을 더 YARU하게!</p>
+            <span class="meta">v2026.7.29 · 비공식 · 연구용</span>
+          </div>
+        </div>
+
+        <p class="lead">
+          브라우저와 하이브리드 셸에서 쓰는 비공식 카카오톡 웹 클라이언트입니다.
+          광고 문구가 아니라, 보이는 UI와 공개 가능한 동작 원리만 정리합니다.
+        </p>
+
+        <img
+          class="promo"
+          src="./branding/vantalk-promo.jpg"
+          alt="Van톡 글래스 앱 셸 미리보기"
+        />
+
+        <div class="cards">
+          <div class="card">
+            <strong>표면만 공개</strong>
+            <p>웹 UI · 하이브리드 셸. 백엔드·구동단은 카카오 팀 · nyase(NiSeullent) 외 비공개.</p>
+          </div>
+          <div class="card">
+            <strong>연구 목적</strong>
+            <p>동작 원리를 추상적으로 설명하고, UI를 실험하기 위한 공개물입니다.</p>
+          </div>
+          <div class="card">
+            <strong>글래스 셸</strong>
+            <p>크림 무대 위 반투명 패널 · 다크 레일 · 카카오 옐로우 포인트(#FEE500).</p>
+          </div>
+        </div>
+
+        <div class="note">
+          Van톡은 Kakao와 무관합니다. 「더 빠르게 / 더 안전하게 / 더 자유롭게」 같은 비교 광고를 약속하지 않습니다.
+          공식 앱을 대체하지 않습니다.
+        </div>
+
+        <p class="foot">브랜드 컬러 #FEE500 · 소스 <a href="https://github.com/NiSeullent/VanTalk">NiSeullent/VanTalk</a></p>
+      </div>
+    </section>
+  </div>
 </body>
 </html>

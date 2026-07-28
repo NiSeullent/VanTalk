@@ -4,7 +4,7 @@
 
 비공식 카카오톡 **웹 클라이언트** · **하이브리드 데스크톱 셸**
 
-[![Van톡](docs/branding/vantalk-hero.jpg)](https://vantalk.nyase.kr/)
+[![Van톡 글래스 셸](docs/branding/vantalk-promo.jpg)](https://vantalk.nyase.kr/)
 
 <p align="center">
   <img src="docs/branding/vantalk-logo.png" alt="Van톡 로고" width="160" />

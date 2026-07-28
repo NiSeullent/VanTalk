@@ -148,9 +148,9 @@ fn orb(uv: vec2f, c: vec2f, r: f32, col: vec3f) -> vec3f {
   return col * (f * f);
 }
 @fragment fn fs(input: VSOut) -> @location(0) vec4f {
-  let t = u.time; var uv = input.uv; var col = vec3f(0.035, 0.045, 0.07);
-  col += orb(uv, vec2f(0.78 + 0.04*sin(t*0.21), 0.18 + 0.05*cos(t*0.17)), 0.55, vec3f(0.22,0.30,0.62));
-  col += orb(uv, vec2f(0.22 + 0.05*cos(t*0.13), 0.82 + 0.04*sin(t*0.19)), 0.62, vec3f(0.42,0.34,0.08));
+  let col = vec3f(0.94, 0.91, 0.84);
+  col += orb(uv, vec2f(0.78 + 0.04*sin(t*0.21), 0.18 + 0.05*cos(t*0.17)), 0.55, vec3f(1.0, 0.95, 0.55));
+  col += orb(uv, vec2f(0.22 + 0.05*cos(t*0.13), 0.82 + 0.04*sin(t*0.19)), 0.62, vec3f(0.99, 0.90, 0.2));
   return vec4f(col, 1.);
 }`,
     });
@@ -183,7 +183,7 @@ fn orb(uv: vec2f, c: vec2f, r: f32, col: vec3f) -> vec3f {
       const pass = encoder.beginRenderPass({
         colorAttachments: [{
           view: context.getCurrentTexture().createView(),
-          clearValue: { r: 0.035, g: 0.045, b: 0.07, a: 1 },
+          clearValue: { r: 0.94, g: 0.91, b: 0.84, a: 1 },
           loadOp: 'clear',
           storeOp: 'store',
         }],
@@ -215,7 +215,7 @@ function startCanvas2d(
     const w = canvas.width;
     const h = canvas.height;
     const t = (performance.now() - started) / 1000;
-    ctx.fillStyle = '#090c13';
+    ctx.fillStyle = '#efe9dc';
     ctx.fillRect(0, 0, w, h);
 
     const orb = (x: number, y: number, r: number, color: string) => {
@@ -233,13 +233,13 @@ function startCanvas2d(
       w * (0.78 + 0.04 * Math.sin(t * 0.21)),
       h * (0.18 + 0.05 * Math.cos(t * 0.17)),
       span * 0.42,
-      'rgba(117,146,255,0.28)',
+      'rgba(255, 244, 170, 0.85)',
     );
     orb(
       w * (0.22 + 0.05 * Math.cos(t * 0.13)),
       h * (0.82 + 0.04 * Math.sin(t * 0.19)),
       span * 0.48,
-      'rgba(255,225,59,0.16)',
+      'rgba(254, 229, 0, 0.35)',
     );
     schedule(frame);
   };

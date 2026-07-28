@@ -1,16 +1,16 @@
 # Van톡 문서 · v2026.7.29
 
-**카카오톡을 더 YARU하게!**
+**카카오톡을 더 YARU하게!** — 비공식 · 연구용 웹 클라이언트
 
-![Van톡](branding/vantalk-hero.jpg)
+![Van톡 글래스 셸](branding/vantalk-promo.jpg)
 
-- [동작 원리 · 연구 목적](principles.md) — 추상 원리와 구동단 비공개 정책
-- [아키텍처](architecture.md) — 웹 + 하이브리드 셸
-- [패치노트](patch-notes.md) — v2026.7.29
-- [버전](version.md) — 버전 메타
-- [면책](disclaimer.md) — 비공식 클라이언트 주의
+- [동작 원리 · 연구 목적](principles.md)
+- [아키텍처](architecture.md)
+- [패치노트](patch-notes.md)
+- [버전](version.md)
+- [면책](disclaimer.md)
 
 제품: [https://vantalk.nyase.kr/](https://vantalk.nyase.kr/)  
 소스(웹만): [https://github.com/NiSeullent/VanTalk](https://github.com/NiSeullent/VanTalk)
 
-브랜딩 에셋: [`branding/`](branding/) · 컬러 `#FEE500`
+브랜딩: **Van톡** · `#FEE500` · 글래스 셸 (전단지형 과대광고 톤 지양)
