@@ -6,8 +6,8 @@
   --input-bg: rgba(255, 255, 255, 0.075);
   --hover: rgba(255, 255, 255, 0.075);
   --active: rgba(255, 255, 255, 0.12);
-  --brand: #ffe13b;
-  --brand-soft: #fff19a;
+  --brand: #FEE500;
+  --brand-soft: #fff59a;
   --kakao-brown: #191919;
   --text: #f7f8fb;
   --text-2: #bdc4d3;
@@ -1341,6 +1341,23 @@ button.msg-file {
   margin: 0 auto 16px;
   box-shadow: 0 8px 24px rgba(254, 229, 0, 0.25);
 }
+.login-logo-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 14px;
+  box-shadow: 0 8px 24px rgba(254, 229, 0, 0.28);
+  background: var(--brand);
+}
+.login-slogan {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--brand);
+}
 .login-card h1 {
   margin: 0 0 8px;
   font-size: 26px;
@@ -1828,11 +1845,11 @@ button:active:not(:disabled) {
   border-radius: 19px;
   background:
     radial-gradient(circle at 27% 18%, rgba(255, 255, 255, 0.95), transparent 18%),
-    linear-gradient(145deg, #fff071, #ffcf24);
+    linear-gradient(145deg, #fff59a, #FEE500);
   box-shadow:
     inset 0 2px 2px rgba(255, 255, 255, 0.74),
     inset 0 -5px 14px rgba(192, 135, 0, 0.18),
-    0 10px 28px rgba(255, 211, 28, 0.22);
+    0 10px 28px rgba(254, 229, 0, 0.28);
 }
 
 .rail-brand::after {
@@ -2509,10 +2526,10 @@ button:active:not(:disabled) {
   border-radius: 23px;
   background:
     radial-gradient(circle at 25% 18%, rgba(255, 255, 255, 0.96), transparent 19%),
-    linear-gradient(145deg, #fff17b, #ffce17);
+    linear-gradient(145deg, #fff59a, #FEE500);
   box-shadow:
     inset 0 2px 2px rgba(255, 255, 255, 0.72),
-    0 14px 38px rgba(255, 215, 34, 0.25);
+    0 14px 38px rgba(254, 229, 0, 0.28);
   animation: logo-float 4s ease-in-out infinite;
 }
 

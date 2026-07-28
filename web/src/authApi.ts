@@ -343,7 +343,7 @@ export function humanError(code: string): string {
     case 'not_linked':
       return '먼저 Google로 로그인한 뒤 카카오톡 계정을 연결하세요.';
     case 'kakao_already_linked':
-      return '이 카카오톡 계정은 다른 VanTalk 사용자에 이미 연결되어 있습니다.';
+      return '이 카카오톡 계정은 다른 Van톡 사용자에 이미 연결되어 있습니다.';
     case 'google_required':
       return '카카오톡 연결은 Google 로그인 후에만 가능합니다.';
     case 'invalid_credentials':

@@ -13,7 +13,7 @@ function createWindow() {
     height: 800,
     minWidth: 960,
     minHeight: 640,
-    title: `VanTalk ${VERSION}`,
+    title: `Van톡 ${VERSION}`,
     webPreferences: {
       preload: require('path').join(__dirname, 'preload.js'),
       contextIsolation: true,

@@ -2,7 +2,7 @@
   "name": "vantalk-desktop",
   "version": "2026.7.29",
   "private": true,
-  "description": "VanTalk hybrid desktop shell (loads the hosted web app)",
+  "description": "Van톡 hybrid desktop shell (loads the hosted web app)",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -11,7 +11,7 @@
   },
   "build": {
     "appId": "kr.nyase.vantalk",
-    "productName": "VanTalk",
+    "productName": "Van톡",
     "directories": { "output": "dist" },
     "linux": { "target": ["AppImage", "deb"], "category": "Network" },
     "win": { "target": ["nsis"] },

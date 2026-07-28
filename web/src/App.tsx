@@ -1322,7 +1322,7 @@ export default function App() {
                 || data.authorNick
                 || data.displayName
                 || data.nick
-                || 'VanTalk 사용자',
+                || 'Van톡 사용자',
               ),
         authorProfileUrl:
           ownerUid === user.uid
@@ -1689,7 +1689,7 @@ export default function App() {
             notifiedMessageIds.current = new Set([...notifiedMessageIds.current].slice(-100));
           }
           showChatNotification({
-            title: activeRoomMetaRef.current.name || 'VanTalk',
+            title: activeRoomMetaRef.current.name || 'Van톡',
             body: newest.text || newest.fileName || '새 메시지',
             tag: `room-${activeId}`,
             onClick: () => {
@@ -2230,7 +2230,7 @@ export default function App() {
         await insertCommunityMessage(activeId, {
           author_uid: user.uid,
           author_id: '0',
-          nick: myProfile.displayName || user.displayName || user.email || 'VanTalk',
+          nick: myProfile.displayName || user.displayName || user.email || 'Van톡',
           author_profile_url: myProfile.photoURL || user.photoURL || null,
           text,
           send_at_ms: Date.now(),
@@ -2765,7 +2765,7 @@ export default function App() {
     return (
       <div className="login">
         <div className="login-card">
-          <div className="login-logo">V</div>
+          <img className="login-logo-img" src="/branding/vantalk-logo.png" alt="Van톡" width={72} height={72} />
           <p className="login-sub">불러오는 중…</p>
         </div>
       </div>
@@ -2782,7 +2782,7 @@ export default function App() {
     return (
       <div className="login">
         <div className="login-card login-card-wide">
-          <div className="login-logo">V</div>
+          <img className="login-logo-img" src="/branding/vantalk-logo.png" alt="Van톡" width={72} height={72} />
           <h1>카카오톡 계정 연결</h1>
           <p className="login-sub">
             Google 계정 <strong>{user.email}</strong>에<br />
@@ -2847,8 +2847,9 @@ export default function App() {
     return (
       <div className="login">
         <div className="login-card login-card-wide">
-          <div className="login-logo">V</div>
-          <h1>VanTalk</h1>
+          <img className="login-logo-img" src="/branding/vantalk-logo.png" alt="Van톡" width={72} height={72} />
+          <h1>Van톡</h1>
+          <p className="login-slogan">카카오톡을 더 YARU하게!</p>
           <p className="login-sub">
             Google로 시작한 뒤 카카오톡을 연결하세요.<br />
             이후에는 카카오톡 계정으로도 같은 채팅에 로그인할 수 있습니다.
@@ -2953,7 +2954,7 @@ export default function App() {
     return (
       <div className="login">
         <div className="login-card">
-          <div className="login-logo">V</div>
+          <img className="login-logo-img" src="/branding/vantalk-logo.png" alt="Van톡" width={72} height={72} />
           <h1>{statusPollError || !browserOnline ? '계정 상태 확인 지연' : '계정 상태 확인 중…'}</h1>
           <p className="login-sub">
             {statusPollError || !browserOnline
@@ -3002,7 +3003,7 @@ export default function App() {
           {myProfile.photoURL ? (
             <img src={myProfile.photoURL} alt="" referrerPolicy="no-referrer" />
           ) : (
-            'V'
+            <img src="/branding/vantalk-mark.svg" alt="Van톡" />
           )}
         </button>
         <nav className="rail-nav" aria-label="주요 메뉴">
@@ -3184,7 +3185,7 @@ export default function App() {
           )}
           <h1>
             {workspaceView === 'chats'
-              ? activeRoom?.name || 'VanTalk'
+              ? activeRoom?.name || 'Van톡'
               : workspaceView === 'friends'
                 ? '친구'
                 : workspaceView === 'feed'
@@ -4141,7 +4142,7 @@ export default function App() {
                               ? '동기화 실패'
                               : '동기화됨'
                         }`
-                      : 'VanTalk 프로필'}
+                      : 'Van톡 프로필'}
                   </div>
                 </div>
 
@@ -4261,10 +4262,10 @@ export default function App() {
                     </>
                   )}
                   <label>
-                    VanTalk 소개
+                    Van톡 소개
                     <textarea
                       maxLength={400}
-                      placeholder="나를 소개해 보세요 (VanTalk 전용)"
+                      placeholder="나를 소개해 보세요 (Van톡 전용)"
                       value={profileDraft.bio}
                       onChange={(e) => setProfileDraft((d) => ({ ...d, bio: e.target.value }))}
                     />
@@ -4498,7 +4499,7 @@ export default function App() {
                   </label>
                 </div>
                 {sideview.room.channel === 'community_plus' && (
-                  <p className="profile-status">VanTalk 동일 클라이언트 한정 서버입니다. 알림은 브라우저 설정만 적용됩니다.</p>
+                  <p className="profile-status">Van톡 동일 클라이언트 한정 서버입니다. 알림은 브라우저 설정만 적용됩니다.</p>
                 )}
                 <div className="profile-actions">
                   <button
@@ -4542,10 +4543,10 @@ export default function App() {
       {deviceReauth && (
         <div className="device-reauth-root" role="dialog" aria-modal="true" aria-label="기기 재등록">
           <div className="device-reauth-card login-card">
-            <div className="login-logo">V</div>
+            <img className="login-logo-img" src="/branding/vantalk-logo.png" alt="Van톡" width={72} height={72} />
             <h1>기기 재등록</h1>
             <p className="login-sub">
-              카카오톡에서 VanTalk 기기 등록이 해제되었습니다.
+              카카오톡에서 Van톡 기기 등록이 해제되었습니다.
               휴대폰에서 새 기기 인증을 허용한 뒤 계속하세요.
             </p>
             {error && <div className="error-banner">{error}</div>}
@@ -4570,7 +4571,7 @@ export default function App() {
             <h3>{urlIntent.title}</h3>
             <p className="url-intent-host">{urlIntent.subtitle || urlHostname(urlIntent.url)}</p>
             <p className="url-intent-url" title={urlIntent.url}>{urlIntent.url}</p>
-            <p className="url-intent-note">VanTalk 밖의 사이트로 이동합니다. 계속할까요?</p>
+            <p className="url-intent-note">Van톡 밖의 사이트로 이동합니다. 계속할까요?</p>
             <div className="url-intent-actions">
               <button type="button" className="ghost" onClick={() => setUrlIntent(null)}>취소</button>
               <button type="button" className="primary" onClick={confirmUrlIntent}>열기</button>
@@ -4615,7 +4616,8 @@ export default function App() {
               <article className="legal-doc">
                 <header className="legal-doc-head">
                   <h2>버전 {VANTALK_VERSION_LABEL}</h2>
-                  <p>VanTalk 웹 · 하이브리드 셸</p>
+                  <p>Van톡 웹 · 하이브리드 셸</p>
+                  <p className="login-slogan">카카오톡을 더 YARU하게!</p>
                 </header>
                 <section className="legal-section">
                   <h3>이 빌드</h3>
@@ -4651,7 +4653,7 @@ export default function App() {
                   <p>Unofficial client</p>
                 </header>
                 <section className="legal-section">
-                  <p>VanTalk은 비공식 클라이언트이며 Kakao와 무관합니다. 공개 저장소에는 웹 UI만 포함되며 백엔드 키·AWS 접속 방법은 포함되지 않습니다.</p>
+                  <p>Van톡은 비공식 클라이언트이며 Kakao와 무관합니다. 공개 저장소에는 웹 UI만 포함되며 백엔드 키·AWS 접속 방법은 포함되지 않습니다.</p>
                   <p><a href={`${VANTALK_DOCS_URL}disclaimer.html`} target="_blank" rel="noreferrer">전체 면책 문서</a></p>
                 </section>
               </article>
