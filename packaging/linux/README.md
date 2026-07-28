@@ -1,8 +1,15 @@
 # Linux hybrid launcher
 
-v2026.7.29 — opens https://vantalk.nyase.kr/ in the default browser or Electron shell.
+v2026.7.29 — prefer the Tauri `.deb` from [Releases](https://github.com/NiSeullent/VanTalk/releases).
 
 ```bash
-./VanTalk   # browser fallback
-# or: cd ../../desktop && npm start
+# fallback: open hosted web app in the default browser
+./VanTalk
+```
+
+Desktop packages are built from [`desktop/`](../../desktop/) (Tauri 2). Local Docker:
+
+```bash
+cd ../../desktop
+./build-linux-docker.sh
 ```

@@ -1,0 +1,18 @@
+[package]
+name = "vantalk-desktop"
+version = "2026.7.29"
+description = "Van톡 hybrid desktop shell"
+authors = ["nyase (NiSeullent)"]
+edition = "2021"
+license = "MIT"
+
+[lib]
+name = "vantalk_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-opener = "2"

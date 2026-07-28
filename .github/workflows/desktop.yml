@@ -1,4 +1,4 @@
-name: Desktop packages
+name: Desktop packages (Tauri)
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Release tag to publish (e.g. v2026.7.29). Empty = upload artifacts only.'
+        description: 'Release tag to publish (e.g. v2026.7.29). Empty = artifacts only.'
         required: false
         default: ''
 
@@ -15,12 +15,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: desktop-${{ github.ref }}
+  group: desktop-tauri-${{ github.ref }}
   cancel-in-progress: true
-
-env:
-  CSC_IDENTITY_AUTO_DISCOVERY: 'false'
-  ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES: 'true'
 
 jobs:
   build:
@@ -30,23 +26,22 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: windows-exe
+          - name: windows-nsis
             os: windows-latest
-            script: dist:win
+            bundles: nsis
           - name: linux-deb-rpm
-            os: ubuntu-22.04
-            script: dist:linux
-          - name: macos-pkg
+            os: ubuntu-24.04
+            bundles: deb,rpm
+          - name: macos-app
             os: macos-latest
-            script: dist:mac
+            bundles: app
 
     defaults:
       run:
         working-directory: desktop
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -55,109 +50,94 @@ jobs:
           cache: npm
           cache-dependency-path: desktop/package-lock.json
 
-      - name: Install Linux packaging tools
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: desktop/src-tauri -> target
+
+      - name: Install Linux deps
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y rpm fakeroot dpkg
+          sudo apt-get install -y libwebkit2gtk-4.1-dev librsvg2-dev patchelf \
+            libssl-dev libgtk-3-dev libayatana-appindicator3-dev rpm
 
-      - name: Install dependencies
+      - name: Install frontend deps
         run: npm ci
 
-      - name: Build installers
-        run: npm run ${{ matrix.script }}
+      - name: Build Tauri bundles
+        uses: tauri-apps/tauri-action@v0
+        with:
+          projectPath: desktop
+          args: --bundles ${{ matrix.bundles }}
         env:
-          # Unsigned public builds (no Apple/Windows certs in CI)
-          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: List dist output
+      - name: Collect artifacts
         shell: bash
         run: |
-          ls -lah dist || true
-          find dist -maxdepth 2 -type f \( -name '*.exe' -o -name '*.deb' -o -name '*.rpm' -o -name '*.pkg' -o -name '*.blockmap' -o -name '*.yml' \) -print
+          mkdir -p out
+          find src-tauri/target/release/bundle -type f \( \
+            -name '*.deb' -o -name '*.rpm' -o -name '*.exe' -o -name '*.msi' \
+            -o -name '*.dmg' -o -name '*.app.tar.gz' -o -name '*.app' \
+          \) -print -exec cp -v {} out/ \; || true
+          # mac .app is a directory
+          find src-tauri/target/release/bundle -type d -name '*.app' -maxdepth 3 2>/dev/null | while read d; do
+            tar -C "$(dirname "$d")" -czf "out/$(basename "$d").tar.gz" "$(basename "$d")" || true
+          done
+          ls -lah out || true
 
-      - name: Upload build artifacts
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: VanTalk-desktop-${{ matrix.name }}
-          path: |
-            desktop/dist/*.exe
-            desktop/dist/*.deb
-            desktop/dist/*.rpm
-            desktop/dist/*.pkg
-            desktop/dist/*.blockmap
-            desktop/dist/latest*.yml
-          if-no-files-found: error
+          name: VanTalk-tauri-${{ matrix.name }}
+          path: desktop/out/*
+          if-no-files-found: warn
           retention-days: 14
 
   release:
     name: Publish GitHub Release
     needs: build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     if: >
       startsWith(github.ref, 'refs/tags/v') ||
       (github.event_name == 'workflow_dispatch' && inputs.tag != '')
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Resolve release tag
-        id: meta
+      - uses: actions/checkout@v4
+      - id: meta
         shell: bash
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" && -n "${{ inputs.tag }}" ]]; then
-            TAG="${{ inputs.tag }}"
+            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
           else
-            TAG="${GITHUB_REF_NAME}"
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
           fi
-          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
-          echo "Publishing tag: $TAG"
-
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           path: release-assets
-          pattern: VanTalk-desktop-*
+          pattern: VanTalk-tauri-*
           merge-multiple: true
-
-      - name: Collect release files
-        shell: bash
-        run: |
-          mkdir -p upload
-          find release-assets -type f \( -name '*.exe' -o -name '*.deb' -o -name '*.rpm' -o -name '*.pkg' -o -name '*.blockmap' -o -name '*.yml' \) -print -exec cp -v {} upload/ \;
-          ls -lah upload
-          test "$(find upload -type f | wc -l)" -gt 0
-
-      - name: Create or update GitHub Release
-        env:
+      - env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: ${{ steps.meta.outputs.tag }}
         shell: bash
         run: |
           set -euo pipefail
-          BODY="$(cat <<EOF
-          ## Van톡 Desktop ${TAG}
+          mkdir -p upload
+          find release-assets -type f -print -exec cp -v {} upload/ \;
+          ls -lah upload
+          test "$(find upload -type f | wc -l)" -gt 0
+          BODY="Van톡 Desktop (Tauri) ${TAG}
 
-          하이브리드 셸 — 호스팅된 웹 앱(https://vantalk.nyase.kr/)을 네이티브 창으로 엽니다.
+하이브리드 셸 — https://vantalk.nyase.kr/ 를 네이티브 창으로 엽니다.
 
-          | 플랫폼 | 파일 |
-          |--------|------|
-          | Windows | \`VanTalk-*-win-*.exe\` (NSIS) |
-          | Linux | \`VanTalk-*-linux-*.deb\` / \`*.rpm\` |
-          | macOS | \`VanTalk-*-mac-*.pkg\` (x64 · arm64) |
-
-          서명되지 않은 공개 빌드입니다. Windows SmartScreen / macOS Gatekeeper 경고가 날 수 있습니다.
-
-          백엔드·구동단 소스는 포함되지 않습니다. 자세한 공개 범위는 [동작 원리](https://niseullent.github.io/VanTalk/principles.html)를 보세요.
-          EOF
-          )"
-
+Windows NSIS · Linux deb/rpm · macOS app 번들."
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" upload/* --clobber
             gh release edit "$TAG" --notes "$BODY"
           else
-            gh release create "$TAG" upload/* \
-              --title "Van톡 Desktop ${TAG}" \
-              --notes "$BODY"
+            gh release create "$TAG" upload/* --title "Van톡 Desktop ${TAG}" --notes "$BODY"
           fi

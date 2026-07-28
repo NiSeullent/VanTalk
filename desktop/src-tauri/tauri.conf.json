@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Van톡",
+  "version": "2026.7.29",
+  "identifier": "kr.nyase.vantalk",
+  "build": {
+    "frontendDist": "https://vantalk.nyase.kr",
+    "devUrl": "https://vantalk.nyase.kr"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Van톡",
+        "width": 1280,
+        "height": 800,
+        "minWidth": 960,
+        "minHeight": 640,
+        "resizable": true,
+        "fullscreen": false,
+        "focus": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["deb", "rpm", "nsis", "app", "dmg"],
+    "category": "SocialNetworking",
+    "shortDescription": "Van톡 — unofficial KakaoTalk web hybrid shell",
+    "longDescription": "Hybrid desktop shell that opens the hosted Van톡 web client.",
+    "copyright": "Copyright © nyase (NiSeullent)",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "linux": {
+      "deb": {
+        "depends": []
+      },
+      "rpm": {},
+      "appimage": {
+        "bundleMediaFramework": false
+      }
+    },
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": ["Korean", "English"],
+        "displayLanguageSelector": true
+      }
+    },
+    "macOS": {
+      "minimumSystemVersion": "10.15"
+    }
+  }
+}

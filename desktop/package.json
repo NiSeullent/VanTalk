@@ -1,103 +1,18 @@
 {
   "name": "vantalk-desktop",
-  "version": "2026.7.29",
   "private": true,
-  "description": "Van톡 hybrid desktop shell (loads the hosted web app)",
-  "author": "nyase (NiSeullent)",
-  "homepage": "https://vantalk.nyase.kr/",
-  "license": "MIT",
-  "main": "main.js",
+  "version": "2026.7.29",
+  "description": "Van톡 hybrid desktop shell (Tauri) — opens the hosted web app",
+  "type": "module",
   "scripts": {
-    "start": "electron .",
-    "build": "electron-builder --dir",
-    "dist": "electron-builder",
-    "dist:win": "electron-builder --win nsis --x64",
-    "dist:linux": "electron-builder --linux deb rpm --x64",
-    "dist:mac": "electron-builder --mac pkg --x64 --arm64"
-  },
-  "build": {
-    "appId": "kr.nyase.vantalk",
-    "productName": "Van톡",
-    "executableName": "VanTalk",
-    "copyright": "Copyright © nyase (NiSeullent)",
-    "directories": {
-      "output": "dist",
-      "buildResources": "build"
-    },
-    "files": [
-      "main.js",
-      "preload.js",
-      "package.json"
-    ],
-    "extraMetadata": {
-      "name": "vantalk-desktop"
-    },
-    "artifactName": "VanTalk-${version}-${os}-${arch}.${ext}",
-    "asar": true,
-    "linux": {
-      "target": [
-        { "target": "deb", "arch": ["x64"] },
-        { "target": "rpm", "arch": ["x64"] }
-      ],
-      "category": "Network",
-      "maintainer": "nyase (NiSeullent) <NiSeullent@users.noreply.github.com>",
-      "vendor": "nyase",
-      "synopsis": "Van톡 — unofficial KakaoTalk web hybrid shell",
-      "description": "Hybrid desktop shell that opens the hosted Van톡 web client.",
-      "executableName": "VanTalk"
-    },
-    "deb": {
-      "depends": [
-        "libgtk-3-0",
-        "libnotify4",
-        "libnss3",
-        "libxss1",
-        "libxtst6",
-        "xdg-utils",
-        "libatspi2.0-0",
-        "libuuid1"
-      ]
-    },
-    "rpm": {
-      "depends": [
-        "libXScrnSaver",
-        "libnotify",
-        "nss",
-        "libXtst"
-      ]
-    },
-    "win": {
-      "target": [
-        { "target": "nsis", "arch": ["x64"] }
-      ]
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true,
-      "shortcutName": "Van톡",
-      "installerLanguages": ["ko_KR", "en_US"],
-      "language": "1042"
-    },
-    "mac": {
-      "target": [
-        { "target": "pkg", "arch": ["x64", "arm64"] }
-      ],
-      "category": "public.app-category.social-networking",
-      "hardenedRuntime": false,
-      "gatekeeperAssess": false,
-      "identity": null
-    },
-    "pkg": {
-      "allowAnywhere": true,
-      "allowCurrentUserHome": true,
-      "allowRootDirectory": false,
-      "isRelocatable": false
-    }
+    "tauri": "tauri",
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "build:linux": "tauri build --bundles deb",
+    "build:windows": "tauri build --runner cargo-xwin --target x86_64-pc-windows-msvc --bundles nsis",
+    "icon": "tauri icon app-icon.png"
   },
   "devDependencies": {
-    "electron": "^37.2.0",
-    "electron-builder": "^26.0.12"
+    "@tauri-apps/cli": "^2"
   }
 }
