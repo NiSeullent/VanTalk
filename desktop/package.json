@@ -77,7 +77,7 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "Van톡",
-      "installerLanguages": ["Korean", "English"],
+      "installerLanguages": ["ko_KR", "en_US"],
       "language": "1042"
     },
     "mac": {
