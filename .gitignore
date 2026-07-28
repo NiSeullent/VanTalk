@@ -2,8 +2,15 @@
 node_modules/
 dist/
 web/dist/
+docs-site/dist/
+docs-site/node_modules/
 desktop/dist/
+desktop/dist-out/
 desktop/node_modules/
+desktop/.cargo-docker/
+desktop/.rustup-docker/
+desktop/.xwin-cache/
+desktop/src-tauri/target/
 *.log
 .DS_Store
 
@@ -26,7 +33,5 @@ login_data.json
 deploy/
 src/main/
 build/
-!desktop/build/
-!desktop/build/**
 .gradle/
 .firebase/

@@ -30,7 +30,7 @@ Kakao와 무관하며, 공식 앱을 대체하지 않습니다.
 1. Google로 Van톡에 로그인합니다.
 2. 카카오톡 계정을 연결하면 채팅·친구·알림을 웹에서 이어 쓸 수 있습니다.
 3. 데이터·파일은 Supabase 경로를 사용합니다.
-4. 데스크톱은 호스팅된 웹 앱을 여는 Electron 셸입니다.
+4. 데스크톱은 호스팅된 웹 앱을 여는 Tauri 셸입니다.
 
 이 저장소에는 **웹 UI와 하이브리드 셸**이 있습니다.
 
@@ -39,7 +39,7 @@ Kakao와 무관하며, 공식 앱을 대체하지 않습니다.
 ## 기술 개요
 
 ```
-브라우저 / Electron 셸
+브라우저 / Tauri 셸
         │
         ▼
    Van톡 웹 (React + Vite)
@@ -51,10 +51,11 @@ Kakao와 무관하며, 공식 앱을 대체하지 않습니다.
 | 경로 | 역할 |
 |------|------|
 | `web/` | React 웹 앱 (Vite) |
-| `desktop/` | 호스팅 웹을 여는 Electron 셸 |
-| `docs/` | 아키텍처 · 면책 · 패치노트 · 브랜딩 |
+| `desktop/` | 호스팅 웹을 여는 Tauri 셸 |
+| `docs-site/` | 문서 사이트 (Vite React) |
+| `docs/` | 마크다운 원문 · 브랜딩 |
 
-구조는 [docs/architecture.md](docs/architecture.md)를 보세요.
+구조는 [docs/architecture.md](docs/architecture.md), 사용법은 [문서 사이트](https://niseullent.github.io/VanTalk/guide)를 보세요.
 
 ### 로컬에서 웹 UI
 
@@ -72,7 +73,7 @@ npm run dev
 ```bash
 cd desktop
 npm ci
-npm start
+npm run dev
 ```
 
 설치 패키지(Windows · Linux · macOS)는 [Releases](https://github.com/NiSeullent/VanTalk/releases)에 올라갑니다. 자세한 내용은 [`desktop/README.md`](desktop/README.md).
