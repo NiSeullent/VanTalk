@@ -44,11 +44,7 @@
       "vendor": "nyase",
       "synopsis": "Van톡 — unofficial KakaoTalk web hybrid shell",
       "description": "Hybrid desktop shell that opens the hosted Van톡 web client.",
-      "desktop": {
-        "Name": "Van톡",
-        "Comment": "카카오톡을 더 YARU하게!",
-        "Categories": "Network;InstantMessaging;"
-      }
+      "executableName": "VanTalk"
     },
     "deb": {
       "depends": [
