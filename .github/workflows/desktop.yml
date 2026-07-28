@@ -1,0 +1,163 @@
+name: Desktop packages
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to publish (e.g. v2026.7.29). Empty = upload artifacts only.'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: desktop-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+  ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES: 'true'
+
+jobs:
+  build:
+    name: Build (${{ matrix.name }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: windows-exe
+            os: windows-latest
+            script: dist:win
+          - name: linux-deb-rpm
+            os: ubuntu-22.04
+            script: dist:linux
+          - name: macos-pkg
+            os: macos-latest
+            script: dist:mac
+
+    defaults:
+      run:
+        working-directory: desktop
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+
+      - name: Install Linux packaging tools
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rpm fakeroot dpkg
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build installers
+        run: npm run ${{ matrix.script }}
+        env:
+          # Unsigned public builds (no Apple/Windows certs in CI)
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+
+      - name: List dist output
+        shell: bash
+        run: |
+          ls -lah dist || true
+          find dist -maxdepth 2 -type f \( -name '*.exe' -o -name '*.deb' -o -name '*.rpm' -o -name '*.pkg' -o -name '*.blockmap' -o -name '*.yml' \) -print
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: VanTalk-desktop-${{ matrix.name }}
+          path: |
+            desktop/dist/*.exe
+            desktop/dist/*.deb
+            desktop/dist/*.rpm
+            desktop/dist/*.pkg
+            desktop/dist/*.blockmap
+            desktop/dist/latest*.yml
+          if-no-files-found: error
+          retention-days: 14
+
+  release:
+    name: Publish GitHub Release
+    needs: build
+    runs-on: ubuntu-22.04
+    if: >
+      startsWith(github.ref, 'refs/tags/v') ||
+      (github.event_name == 'workflow_dispatch' && inputs.tag != '')
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve release tag
+        id: meta
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && -n "${{ inputs.tag }}" ]]; then
+            TAG="${{ inputs.tag }}"
+          else
+            TAG="${GITHUB_REF_NAME}"
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Publishing tag: $TAG"
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+          pattern: VanTalk-desktop-*
+          merge-multiple: true
+
+      - name: Collect release files
+        shell: bash
+        run: |
+          mkdir -p upload
+          find release-assets -type f \( -name '*.exe' -o -name '*.deb' -o -name '*.rpm' -o -name '*.pkg' -o -name '*.blockmap' -o -name '*.yml' \) -print -exec cp -v {} upload/ \;
+          ls -lah upload
+          test "$(find upload -type f | wc -l)" -gt 0
+
+      - name: Create or update GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.meta.outputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          BODY="$(cat <<EOF
+          ## Van톡 Desktop ${TAG}
+
+          하이브리드 셸 — 호스팅된 웹 앱(https://vantalk.nyase.kr/)을 네이티브 창으로 엽니다.
+
+          | 플랫폼 | 파일 |
+          |--------|------|
+          | Windows | \`VanTalk-*-win-*.exe\` (NSIS) |
+          | Linux | \`VanTalk-*-linux-*.deb\` / \`*.rpm\` |
+          | macOS | \`VanTalk-*-mac-*.pkg\` (x64 · arm64) |
+
+          서명되지 않은 공개 빌드입니다. Windows SmartScreen / macOS Gatekeeper 경고가 날 수 있습니다.
+
+          백엔드·구동단 소스는 포함되지 않습니다. 자세한 공개 범위는 [동작 원리](https://niseullent.github.io/VanTalk/principles.html)를 보세요.
+          EOF
+          )"
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" upload/* --clobber
+            gh release edit "$TAG" --notes "$BODY"
+          else
+            gh release create "$TAG" upload/* \
+              --title "Van톡 Desktop ${TAG}" \
+              --notes "$BODY"
+          fi

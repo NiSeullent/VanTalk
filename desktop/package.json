@@ -3,19 +3,102 @@
   "version": "2026.7.29",
   "private": true,
   "description": "Van톡 hybrid desktop shell (loads the hosted web app)",
+  "author": "nyase (NiSeullent)",
+  "homepage": "https://vantalk.nyase.kr/",
+  "license": "MIT",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "dist:win": "electron-builder --win nsis --x64",
+    "dist:linux": "electron-builder --linux deb rpm --x64",
+    "dist:mac": "electron-builder --mac pkg --x64 --arm64"
   },
   "build": {
     "appId": "kr.nyase.vantalk",
     "productName": "Van톡",
-    "directories": { "output": "dist" },
-    "linux": { "target": ["AppImage", "deb"], "category": "Network" },
-    "win": { "target": ["nsis"] },
-    "files": ["main.js", "preload.js", "icon.png"]
+    "executableName": "VanTalk",
+    "copyright": "Copyright © nyase (NiSeullent)",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "name": "vantalk-desktop"
+    },
+    "artifactName": "VanTalk-${version}-${os}-${arch}.${ext}",
+    "asar": true,
+    "linux": {
+      "target": [
+        { "target": "deb", "arch": ["x64"] },
+        { "target": "rpm", "arch": ["x64"] }
+      ],
+      "category": "Network",
+      "maintainer": "nyase (NiSeullent) <NiSeullent@users.noreply.github.com>",
+      "vendor": "nyase",
+      "synopsis": "Van톡 — unofficial KakaoTalk web hybrid shell",
+      "description": "Hybrid desktop shell that opens the hosted Van톡 web client.",
+      "desktop": {
+        "Name": "Van톡",
+        "Comment": "카카오톡을 더 YARU하게!",
+        "Categories": "Network;InstantMessaging;"
+      }
+    },
+    "deb": {
+      "depends": [
+        "libgtk-3-0",
+        "libnotify4",
+        "libnss3",
+        "libxss1",
+        "libxtst6",
+        "xdg-utils",
+        "libatspi2.0-0",
+        "libuuid1"
+      ]
+    },
+    "rpm": {
+      "depends": [
+        "libXScrnSaver",
+        "libnotify",
+        "nss",
+        "libXtst"
+      ]
+    },
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Van톡",
+      "installerLanguages": ["Korean", "English"],
+      "language": "1042"
+    },
+    "mac": {
+      "target": [
+        { "target": "pkg", "arch": ["x64", "arm64"] }
+      ],
+      "category": "public.app-category.social-networking",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "identity": null
+    },
+    "pkg": {
+      "allowAnywhere": true,
+      "allowCurrentUserHome": true,
+      "allowRootDirectory": false,
+      "isRelocatable": false
+    }
   },
   "devDependencies": {
     "electron": "^37.2.0",

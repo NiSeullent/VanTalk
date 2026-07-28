@@ -100,11 +100,13 @@ npm run dev
 
 ```bash
 cd desktop
-npm install
+npm ci
 npm start
 ```
 
 호스팅된 Van톡 웹을 네이티브 창으로 엽니다.
+
+설치 패키지(Windows `.exe` · Linux `.deb`/`.rpm` · macOS `.pkg`)는 GitHub Actions가 빌드해 [Releases](https://github.com/NiSeullent/VanTalk/releases)에 올립니다. 자세한 방법은 [`desktop/README.md`](desktop/README.md)를 보세요.
 
 ---
 
