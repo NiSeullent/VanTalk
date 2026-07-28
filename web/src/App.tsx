@@ -3180,7 +3180,7 @@ export default function App() {
               {roomsOpen ? '닫기' : '목록'}
             </button>
           ) : (
-            <span className="mobile-brand-mark" aria-hidden>V</span>
+            <img className="mobile-brand-mark" src="/branding/vantalk-mark.svg" alt="" aria-hidden />
           )}
           <h1>
             {workspaceView === 'chats'

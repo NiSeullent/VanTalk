@@ -45,6 +45,24 @@ a:hover { color: var(--brown); }
   border-color: rgba(25,25,25,0.12);
   font-weight: 800;
 }
+.topnav a.brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px 5px 5px;
+  margin-right: 4px;
+  background: rgba(255,255,255,0.72);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.topnav a.brand-link img {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  object-fit: cover;
+  background: var(--accent);
+  border: 1px solid rgba(25,25,25,0.08);
+}
 .shell {
   display: grid;
   grid-template-columns: 64px 1fr;
@@ -67,6 +85,13 @@ a:hover { color: var(--brown); }
   background: linear-gradient(145deg, #fff59a, #FEE500);
   color: #191919; font-weight: 900; display: grid; place-items: center;
   box-shadow: 0 8px 18px rgba(254,229,0,0.35);
+  overflow: hidden;
+}
+.rail .mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .rail .dot {
   width: 10px; height: 10px; border-radius: 50%;

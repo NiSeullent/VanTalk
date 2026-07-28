@@ -3785,15 +3785,12 @@ button:active:not(:disabled) {
   .mobile-brand-mark {
     width: 34px;
     height: 34px;
-    display: grid;
-    place-items: center;
+    display: block;
+    object-fit: cover;
     border: 1px solid rgba(255, 255, 255, 0.38);
     border-radius: 12px;
-    color: #19160b;
     background: linear-gradient(145deg, #ffef72, #ffd01b);
     box-shadow: 0 6px 18px rgba(255, 214, 28, 0.16);
-    font-size: 15px;
-    font-weight: 900;
   }
 
   .mobile-dock {
